@@ -26,7 +26,7 @@
                                 <a href="chamados.php"> Abertos</a>
                             </li>
                             <li>
-                                <a href="chamados.php"> Abrir Chamado</a>
+                                <a href="chamado_add.php"> Abrir Chamado</a>
                             </li>
                             <li>
                                 <a href="chamados.php"> Pesquisar</a>

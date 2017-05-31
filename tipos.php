@@ -25,8 +25,8 @@ include_once './includes/dashboard.php';
                         echo "<tr><td><a href='tipo_edit.php?id=" . $row['id'] . "'>" . $row['id'] . " </a></td>
                             <td>" . $row['descricao'] . "</td>
                             <td>
-                            <a class='btn btn-warning btn-xs' href='tipo_edit.php?id=" . $row['id'] . "'><i class='fa fa-trash-o' aria-hidden='true'></i> Editar</a>
-                            <a class='btn btn-danger btn-xs' href='tipo_exc.php?id=" . $row['id'] . "''><i class='fa fa-pencil' aria-hidden='true'></i> Excluir</a></td>
+                                <a class='btn btn-warning btn-xs' href='tipo_edit.php?id=" . $row['id'] . "'><i class='fa fa-pencil' aria-hidden='true'></i> Editar</a>
+                                <a class='btn btn-danger btn-xs' href='tipo_exc.php?id=" . $row['id'] . "''><i class='fa fa-trash-o' aria-hidden='true'></i> Excluir</a></td>
                             </tr>";
                     }
                     ?>

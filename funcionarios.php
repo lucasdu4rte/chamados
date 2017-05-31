@@ -41,8 +41,8 @@ include_once './includes/dashboard.php';
                             <td>" . $departamento['descricao']. "</td>
                             <td>" . $nivel['descricao']. "</td>
                             <td>
-                            <a class='btn btn-warning btn-xs' href='funcionario_edit.php?id=" . $row['id'] . "'><i class='fa fa-trash-o' aria-hidden='true'></i> Editar</a>
-                            <a class='btn btn-danger btn-xs' href='funcionario_exc.php?id=" . $row['id'] . "''><i class='fa fa-pencil' aria-hidden='true'></i> Excluir</a></td>
+                                <a class='btn btn-warning btn-xs' href='funcionario_edit.php?id=" . $row['id'] . "'><i class='fa fa-pencil' aria-hidden='true'></i> Editar</a>
+                                <a class='btn btn-danger btn-xs' href='funcionario_exc.php?id=" . $row['id'] . "''><i class='fa fa-trash-o' aria-hidden='true'></i> Excluir</a></td>
                             </tr>";
 
                     }
