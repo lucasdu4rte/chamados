@@ -2,8 +2,6 @@
 include_once './includes/cabecalho.php';
 include_once './includes/dashboard.php';
 ?>
-<h1 class="page-header">Dashboard</h1>
-
 <div class="row">
     <div class="col-lg-12">
         <h1 class="page-header">Page Title</h1>
