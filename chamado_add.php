@@ -117,8 +117,7 @@ if ($_POST) {
             <div class="row">
                 <div class="form-group col-md-5">
                     <label for="observacao">Observação</label>
-                    <textarea class="form-control" name="observacao" id="observacao">
-                    </textarea>
+                    <textarea class="form-control" name="observacao" id="observacao"></textarea>
                 </div>
             </div>
             <div class="row">

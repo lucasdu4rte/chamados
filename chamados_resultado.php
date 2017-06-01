@@ -16,8 +16,8 @@ if ($_POST) {
             $status = mysqli_escape_string($con, $_POST['status']);
             $custom .= ' AND id_status = ' . $status;
         }
-        if (!empty($_POST['nome_solicitante'])) {
-            $solicitante = mysqli_escape_string($con, $_POST['nome_solicitante']);
+        if (!empty($_POST['id_solicitante'])) {
+            $solicitante = mysqli_escape_string($con, $_POST['id_solicitante']);
             $custom .= ' AND id_solicitante = ' . $solicitante;
         }
         if (!empty($_POST['inicio_abertura']) AND ! empty($_POST['fim_abertura'])) {

@@ -1,5 +1,5 @@
 <?php
-    header('Location: painel.php');
+    header('Location: dashboard_index.php');
     
     include_once './includes/cabecalho.php';
     include_once './includes/dashboard.php';

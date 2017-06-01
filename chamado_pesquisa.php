@@ -35,7 +35,17 @@ include_once './includes/funcoes.php';
             <div class="form-group">
                 <div class="col-md-6">
                     <label>Nome do solicitante</label>
-                    <input type="text" name="nome_solicitante" id="nome_solicitante" class="form-control"/>
+                    <select name="id_solicitante" id="id_solicitante" class="form-control">
+                        <option value="0" selected>Selecione...</option>
+                        <?php
+                        $sql = 'SELECT * FROM funcionario';
+                        $resultado = mysqli_query($con, $sql) or die(mysqli_error($con));
+
+                        while ($row = mysqli_fetch_array($resultado)) {
+                            echo "<option value='" . $row['id'] . "'>" . $row['nome'] . "</option>";
+                        }
+                        ?>    
+                    </select>
                 </div>
             </div>
         </div>        
