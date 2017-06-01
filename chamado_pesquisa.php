@@ -6,9 +6,23 @@ require_once './includes/conexao.php';
 include_once './includes/funcoes.php';
 ?>  
 
+<script>
+    function valida(form)
+    {
+        if (form.codigo.value == "") ||
+            (form.solicitante.value == "")
+        {
+            alert("Digite um código ou o nome do solicitante.")
+            form.codigo.focus();
+            return false;
+        }
+    }
+
+</script>    
+
 <h1 class="page-header">Pesquisar Chamado</h1>
 <div class="form-horizontal" style="margin: 15px 15px 15px">
-    <form id="pesq_chamado" method="post" action="chamados_resultado.php">
+    <form id="pesq_chamado"  onsubmit="return valida(this);" method="post" action="chamados_resultado.php">
         <div class="row">
             <div class="form-group">
                 <div class="col-md-3">

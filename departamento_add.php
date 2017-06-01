@@ -19,13 +19,25 @@ if ($_POST) {
             $mensagem = '<div class="row"><p class="alert alert-danger">O cadastro do departamento não foi efetuado. <br>Por favor, tente mais tarde.</p></div>';
         }
         
-    }
+    }      
 ?>
-    <h1 class="page-header">Departamento (Adicionar)</h1>
+    <script>
+        function valida(form){           
+           if (form.descricao.value=="")   
+       {
+           alert("O campo [descrição] é de preenchimento obrigatório.");
+           form.descricao.focus();
+           return false;
+       }
+        }
+
+    </script>
     
+    <h1 class="page-header">Departamento (Adicionar)</h1>
+
     <div class="form-horizontal" style="margin: 15px 15px 15px 15px">
         <?= $mensagem; ?>
-        <form method="post" action="departamento_add.php">
+        <form onsubmit="return valida(this);" method="post" action="departamento_add.php">
             <div class="row">
                 <div class="form-group col-md-5">
                     <label for="descricao">Descrição</label>

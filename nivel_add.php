@@ -1,32 +1,46 @@
-<?php    
+<?php
 require_once './includes/conexao.php';
 include_once './includes/cabecalho.php';
 include_once './includes/dashboard.php';
 $mensagem = '';
 
 if ($_POST) {
-        $descricao = mysqli_escape_string($con, $_POST['descricao']);
-        
-        $sql = "INSERT INTO nivel (descricao) VALUES('$descricao')";
-        
-        $resultado = mysqli_query($con, $sql);
-        
-        if ($resultado) {
-            $mensagem = '<div class="row"><p class="alert alert-success">Nível cadastrado com sucesso! 
+    $descricao = mysqli_escape_string($con, $_POST['descricao']);
+
+    $sql = "INSERT INTO nivel (descricao) VALUES('$descricao')";
+
+    $resultado = mysqli_query($con, $sql);
+
+    if ($resultado) {
+        $mensagem = '<div class="row"><p class="alert alert-success">Nível cadastrado com sucesso! 
                             <a class="btn btn-default" href="niveis.php">Voltar</a>
                         </p></div>';
-        } else {
-            $mensagem = '<div class="row"><p class="alert alert-danger">O cadastro do nível não foi efetuado. <br>Por favor, tente mais tarde.</p></div>';
-        }
-        
+    } else {
+        $mensagem = '<div class="row"><p class="alert alert-danger">O cadastro do nível não foi efetuado. <br>Por favor, tente mais tarde.</p></div>';
     }
+}
 ?>
+
+
+<script>
+    function valida(form)
+    {
+
+        if (form.descricao.value == "")
+        {
+            alert("O campo [descrição] é de preenchimento obrigatório");
+            form.descricao.focus();
+            return false;
+        }
+    }
+
+</script>  
 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
     <h1 class="page-header">Nível (Adicionar)</h1>
-    
+
     <div class="form-horizontal" style="margin: 15px 15px 15px 15px">
         <?= $mensagem; ?>
-        <form method="post" action="nivel_add.php">
+        <form method="post" onsubmit="return valida(this);"  action="nivel_add.php">
             <div class="row">
                 <div class="form-group col-md-5">
                     <label for="descricao">Descrição</label>
