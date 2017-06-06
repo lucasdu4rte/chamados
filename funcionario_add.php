@@ -108,7 +108,7 @@ if ($_POST) {
             <div class="row">
                 <div class="form-group col-md-5">
                     <label for="nome">Nome</label>
-                    <input type="text" class="form-control" name="nome" id="nome" placeholder="Nome" value="Pedro">
+                    <input type="text" class="form-control" name="nome" id="nome" placeholder="Nome" value="">
                 </div>
             </div>
             <div class="row">
@@ -120,14 +120,14 @@ if ($_POST) {
             <div class="row">
                 <div class="form-group col-md-5">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" name="email" id="email" placeholder="Email" value="pedro@email.com">
+                    <input type="email" class="form-control" name="email" id="email" placeholder="Email" value="">
                 </div>
             </div>
             
             <div class="row">
                 <div class="form-group col-md-5">
                     <label for="telefone">Telefone</label>
-                    <input type="tel" class="form-control" name="telefone" id="telefone" placeholder="Telefone" value="(19) 99955-7789">
+                    <input type="tel" class="form-control" name="telefone" id="telefone" placeholder="Telefone" >
                 </div>
             </div>
             <div class="row">
@@ -139,7 +139,7 @@ if ($_POST) {
             <div class="row">
                 <div class="form-group col-md-5">
                     <label for="celular">Celular</label>
-                    <input type="tel" class="form-control" name="celular" id="celular" placeholder="Celular"  value="(19) 99955-7789">
+                    <input type="tel" class="form-control" name="celular" id="celular" placeholder="Celular"  value="">
                 </div>
             </div>
             <div class="row">
@@ -183,7 +183,7 @@ if ($_POST) {
             <div class="row">
                 <div class="form-group col-md-5">
                     <label for="senha">Senha</label>
-                    <input type="password" class="form-control" name="senha" id="senha" placeholder="Senha" value="123">
+                    <input type="password" class="form-control" name="senha" id="senha" placeholder="Senha" value="">
                 </div>
             </div>
             <div class="row">
@@ -192,7 +192,6 @@ if ($_POST) {
             </div>
         </form>
     </div>
-   
     
 <?php
 include_once './includes/rodape.php';

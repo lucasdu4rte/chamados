@@ -31,6 +31,9 @@
 
         <!-- Bootstrap Core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
+        
+        <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+        <link href="assets/css/ie10-viewport-bug-workaround.css" rel="stylesheet">
 
         <!-- MetisMenu CSS -->
         <link href="css/metisMenu.min.css" rel="stylesheet">
@@ -72,7 +75,7 @@
 
                 <!-- Top Navigation: Left Menu -->
                 <ul class="nav navbar-nav navbar-left navbar-top-links">
-                    <li><a href="#"><i class="fa fa-home fa-fw"></i> Website</a></li>
+                    <li><a href="singlepage.html"><i class="fa fa-home fa-fw"></i> Website</a></li>
                 </ul>
 
                 <!-- Top Navigation: Right Menu -->

@@ -1,12 +1,28 @@
 <?php
 include_once './includes/cabecalho.php';
 include_once './includes/dashboard.php';
+
 require_once './includes/conexao.php';
+include_once './includes/funcoes.php';
 ?>  
+
+<script>
+    function valida(form)
+    {
+        if (form.codigo.value == "") ||
+            (form.solicitante.value == "")
+        {
+            alert("Digite um código ou o nome do solicitante.")
+            form.codigo.focus();
+            return false;
+        }
+    }
+
+</script>    
 
 <h1 class="page-header">Pesquisar Chamado</h1>
 <div class="form-horizontal" style="margin: 15px 15px 15px">
-    <form id="pesq_chamado" method="post" action="chamados_resultado.php">
+    <form id="pesq_chamado"  onsubmit="return valida(this);" method="post" action="chamados_resultado.php">
         <div class="row">
             <div class="form-group">
                 <div class="col-md-3">
@@ -16,7 +32,7 @@ require_once './includes/conexao.php';
                 <div class="col-md-3">
                     <label for="status">Status do chamado</label>
                     <select name="status" id="status" class="form-control">
-                        <option selected>Selecione...</option>
+                        <option value="0" selected>Selecione...</option>
                         <?php
                         $sql = 'SELECT * FROM status_chamado';
                         $resultado = mysqli_query($con, $sql) or die(mysqli_error($con));
@@ -33,19 +49,29 @@ require_once './includes/conexao.php';
             <div class="form-group">
                 <div class="col-md-6">
                     <label>Nome do solicitante</label>
-                    <input type="text" name="nome_solicitante" id="nome_solicitante" class="form-control"/>
+                    <select name="id_solicitante" id="id_solicitante" class="form-control">
+                        <option value="0" selected>Selecione...</option>
+                        <?php
+                        $sql = 'SELECT * FROM funcionario';
+                        $resultado = mysqli_query($con, $sql) or die(mysqli_error($con));
+
+                        while ($row = mysqli_fetch_array($resultado)) {
+                            echo "<option value='" . $row['id'] . "'>" . $row['nome'] . "</option>";
+                        }
+                        ?>    
+                    </select>
                 </div>
             </div>
         </div>        
         <div class="row">
             <div class="form-group">
                 <div class="col-md-3">
-                    <label>Data de abertura de</label>
-                    <input type="date" name="inicio_chamado" id="inicio_chamado" class="form-control"/>
+                    <label>Data de abertura inicial</label>
+                    <input type="text" name="inicio_abertura" id="inicio_abertura" class="form-control"/>
                 </div>
                 <div class="col-md-3">
-                    <label>Data de abertura ate</label>
-                    <input type="date" name="fim_chamado" id="fim_chamado" class="form-control" value="<?php echo date('d/m/Y'); ?>"/>
+                    <label>Data de abertura final</label>
+                    <input type="text" name="fim_abertura" id="fim_abertura" class="form-control" value="<?php echo date('d/m/Y'); ?>"/>
                 </div>
             </div>
         </div>
@@ -57,5 +83,4 @@ require_once './includes/conexao.php';
 
 
 <?php
-include_once './includes/cabecalho.php';
-?>
+include_once './includes/rodape.php';

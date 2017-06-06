@@ -14,22 +14,22 @@
                         </div>
                     </li>
                     <li>
-                        <a href="painel.php" class="active"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+                        <a href="dashboard_index.php" class="active"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                     </li>
                     <li>
                         <a href=""><i class="fa fa-ticket fa-fw"></i> Chamados<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="chamados.php"> Em atendimento</a>
+                                <a href="chamados_atendimento.php"> Em atendimento</a>
                             </li>
                             <li>
-                                <a href="chamados.php"> Abertos</a>
+                                <a href="chamados_abertos.php"> Chamados abertos</a>
                             </li>
                             <li>
                                 <a href="chamado_add.php"> Abrir Chamado</a>
                             </li>
                             <li>
-                                <a href="chamados.php"> Pesquisar</a>
+                                <a href="chamado_pesquisa.php"> Pesquisar</a>
                             </li>
                         </ul>
                     </li>
