@@ -32,7 +32,6 @@ if ($_POST) {
         
     }
 ?>
-
 <script>
       function valida(form)
       {
@@ -101,7 +100,6 @@ if ($_POST) {
 
     }
 </script>
-
     <h1 class="page-header">Funcionário (Adicionar)</h1>
     
     <div class="form-horizontal" style="margin: 15px 15px 15px 15px">
@@ -193,7 +191,7 @@ if ($_POST) {
                 <button type="submit" class="btn btn-success">Salvar</button>
             </div>
         </form>
-    </div>  
+    </div>
     
 <?php
 include_once './includes/rodape.php';
