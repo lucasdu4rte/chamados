@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 01-Jun-2017 às 05:11
+-- Generation Time: 02-Jun-2017 às 00:09
 -- Versão do servidor: 5.7.14
 -- PHP Version: 5.6.25
 
@@ -47,8 +47,8 @@ CREATE TABLE `chamado` (
 --
 
 INSERT INTO `chamado` (`id`, `id_responsavel`, `id_solicitante`, `telefone`, `ramal`, `data_inc`, `data_alt`, `data_prazo`, `descricao`, `observacao`, `id_status`, `id_tipo`, `id_priori`) VALUES
-(2, 1, 1, '19499911', '2131', '2017-06-01', NULL, '2017-06-05', 'iasudihuahsd', 'asduahsiudauhsd', 1, 1, 1),
-(3, 2, 1, NULL, NULL, '2017-05-31', NULL, '2017-06-12', 'Skype nÃ£o conecta', 'Skype nÃ£o conecta, mas internet estÃ¡ normal...', 1, 2, 0);
+(2, 2, 1, '19499911', '2131', '2017-06-01', '2017-06-01', '2017-06-05', 'iasudihuahsd', 'asduahsiudauhsd', 2, 1, 2),
+(3, 2, 1, NULL, NULL, '2017-05-31', NULL, '2017-06-12', 'Skype nÃ£o conecta', 'Skype nÃ£o conecta, mas internet estÃ¡ normal...', 2, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -98,8 +98,8 @@ CREATE TABLE `funcionario` (
 
 INSERT INTO `funcionario` (`id`, `nome`, `data_nasc`, `email`, `senha`, `telefone`, `celular`, `ramal`, `id_departamento`, `status`, `cargo`, `id_nivel`) VALUES
 (1, 'Lucas', '11/12/1995', 'lucas@email.com', 'asdauisdui', '19 33778032', 'asdaushduahsd', '8033', 1, 's', 'analista', 1),
-(2, 'Daniel', '28/11/1995', 'daniel@email.com', '', '19 33778032', NULL, '8034', 1, 's', '', 1),
-(3, 'FuncioTeste', '11/12/1995', 'FuncioTeste@gmail.com', '', '(19) 3333333', '(19) 99999-9999', '3333', 1, 's', '', 1),
+(2, 'Daniel', '28/11/1995', 'daniel@email.com', '123', '19 33778032', NULL, '8034', 1, 's', '', 1),
+(3, 'FuncioTeste', '11/12/1995', 'FuncioTeste@gmail.com', '123', '(19) 3333333', '(19) 99999-9999', '3333', 1, 's', '', 1),
 (4, 'Hiago', '11/12/1995', 'hia@gmailc.om', '123456', '99 9999 999922', '99999999999', '2999', 2, 's', 'Auxiliar', 4);
 
 -- --------------------------------------------------------
@@ -112,9 +112,24 @@ CREATE TABLE `historico` (
   `id` int(11) NOT NULL,
   `descricao` varchar(1000) NOT NULL,
   `data_inc` date NOT NULL,
+  `hora_inc` time DEFAULT NULL,
   `id_funcionario` int(11) NOT NULL,
   `id_chamado` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1;
+
+--
+-- Extraindo dados da tabela `historico`
+--
+
+INSERT INTO `historico` (`id`, `descricao`, `data_inc`, `hora_inc`, `id_funcionario`, `id_chamado`) VALUES
+(1, 'TESTEEEEE TESTEEEEE TESTEEEEE TESTEEEEE TESTEEEEE ', '2017-06-01', '10:11:48', 2, 3),
+(2, 'TESTEEEEE2222 TESTEEEEE22222 TESTEEEEE TESTEEEEE TESTEEEEE222 ', '2017-06-01', '03:09:14', 2, 3),
+(3, 'teste', '2017-06-01', '20:33:14', 2, 1),
+(4, 'teste', '2017-06-01', '20:34:35', 1, 2),
+(5, 'como solicitando o usuÃ¡rio foi atendido.', '2017-06-01', '20:35:29', 1, 2),
+(6, 'Finalizando chamado.', '2017-06-01', '20:36:34', 1, 2),
+(7, 'Finalizando chamado.', '2017-06-01', '20:37:39', 1, 2),
+(8, 'teste', '2017-06-01', '20:38:10', 1, 2);
 
 -- --------------------------------------------------------
 
@@ -133,7 +148,7 @@ CREATE TABLE `nivel` (
 
 INSERT INTO `nivel` (`id`, `descricao`) VALUES
 (1, 'admin'),
-(4, 'user');
+(2, 'user');
 
 -- --------------------------------------------------------
 
@@ -285,7 +300,7 @@ ALTER TABLE `funcionario`
 -- AUTO_INCREMENT for table `historico`
 --
 ALTER TABLE `historico`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 --
 -- AUTO_INCREMENT for table `nivel`
 --

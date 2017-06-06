@@ -1,24 +1,75 @@
 <?php
 include_once './includes/cabecalho.php';
 include_once './includes/dashboard.php';
+
+require_once './includes/conexao.php';
+include_once './includes/funcoes.php';
 ?>
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Page Title</h1>
+        <h1 class="page-header">Dashboard</h1>
         <div class="row">
-            <div class="col-sm-6 col-md-6 col-lg-6">
+            <div class="col-sm-6 col-md-6 col-lg-6 " style="border: #bcddff solid 1px;  min-width: 300px; min-height: 200px;">
                 <h4>Chamados Abertos</h4>
+                <div class="table-responsive" style="margin-top: 15px">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>Código Chamado</th>
+                                <th>Solicitante</th>
+                                <th>Abertura</th>
+                                <th>Descrição</th>
+                                <th>Status</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            $sql = 'SELECT * FROM chamado WHERE id_status = 1';
+                            $resultado = mysqli_query($con, $sql) or die(mysqli_error($con));
+                            if (mysqli_num_rows($resultado) > 0) {
+                                while ($row = mysqli_fetch_array($resultado)) {
+                                    // Selecionando informações do solicitante
+                                    $sql = 'SELECT * FROM funcionario WHERE id = ' . $row['id_solicitante'];
+                                    $rsolicitante = mysqli_query($con, $sql);
+                                    $solicitante = mysqli_fetch_assoc($rsolicitante);
+
+                                    // Selecionando status do chamado 
+                                    $sql = 'SELECT * FROM status_chamado WHERE id = ' . $row['id_status'];
+                                    $rstatus = mysqli_query($con, $sql);
+                                    $status = mysqli_fetch_assoc($rstatus);
+
+                                    echo "<tr><td>" . $row['id'] . "</td>
+                                    <td>" . $solicitante['nome'] . "</td>
+                                    <td>" . convertData('dma', $row['data_inc']) . "</td>
+                                    <td>" . $row['descricao'] . "</td>
+                                    <td>" . $status['descricao'] . "</td>
+                                    <td><a class='btn btn-default btn-xs' href='chamado_visual.php?id=" . $row['id'] . "'><i class='fa fa-eye'></i> Visualizar</a></td>
+                                </tr>";
+                                }
+                            } else {
+                                echo '<tr><td>Nenhum resultado foi encontrado.</td></tr>';
+                            }
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
-            <div class="col-sm-6 col-md-6 col-lg-6">
+            <div class="col-sm-6 col-md-6 col-lg-6" style="border: #bcddff solid 1px; min-width: 300px; min-height: 200px;">
                 <h4>Chamados em atendimento</h4>
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-6 col-md-6 col-lg-6">
+            <div class="col-sm-6 col-md-6 col-lg-6" style="border: #bcddff solid 1px;  min-width: 300px; min-height: 200px;">
                 <h4>Chamados concluídos está semana</h4>
+                
             </div>
-            <div class="col-sm-6 col-md-6 col-lg-6">
+            <div class="col-sm-6 col-md-6 col-lg-6" style="border: #bcddff solid 1px;  min-width: 300px; min-height: 200px;">
                 <h4>Pesquisar Chamado</h4>
+                <div class="col-md-6">
+                    <label for="codigo">Código do chamado</label>
+                    <input type="text" name="codigo" id="codigo" class="form-control"/>
+                </div>
             </div>
         </div>
         <div class="row">
@@ -27,159 +78,6 @@ include_once './includes/dashboard.php';
         <a href="#top" class="fa fa-arrow-circle-up" aria-hidden="true"></a>
     </div>
 </div>
-
-<div class="row placeholders">
-    <div class="col-xs-6 col-sm-3 placeholder">
-        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-        <h4>Label</h4>
-        <span class="text-muted">Something else</span>
-    </div>
-    <div class="col-xs-6 col-sm-3 placeholder">
-        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-        <h4>Label</h4>
-        <span class="text-muted">Something else</span>
-    </div>
-    <div class="col-xs-6 col-sm-3 placeholder">
-        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-        <h4>Label</h4>
-        <span class="text-muted">Something else</span>
-    </div>
-    <div class="col-xs-6 col-sm-3 placeholder">
-        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" width="200" height="200" class="img-responsive" alt="Generic placeholder thumbnail">
-        <h4>Label</h4>
-        <span class="text-muted">Something else</span>
-    </div>
-</div>
-
-<h2 class="sub-header">Section title</h2>
-<div class="table-responsive">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Header</th>
-                <th>Header</th>
-                <th>Header</th>
-                <th>Header</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>1,001</td>
-                <td>Lorem</td>
-                <td>ipsum</td>
-                <td>dolor</td>
-                <td>sit</td>
-            </tr>
-            <tr>
-                <td>1,002</td>
-                <td>amet</td>
-                <td>consectetur</td>
-                <td>adipiscing</td>
-                <td>elit</td>
-            </tr>
-            <tr>
-                <td>1,003</td>
-                <td>Integer</td>
-                <td>nec</td>
-                <td>odio</td>
-                <td>Praesent</td>
-            </tr>
-            <tr>
-                <td>1,003</td>
-                <td>libero</td>
-                <td>Sed</td>
-                <td>cursus</td>
-                <td>ante</td>
-            </tr>
-            <tr>
-                <td>1,004</td>
-                <td>dapibus</td>
-                <td>diam</td>
-                <td>Sed</td>
-                <td>nisi</td>
-            </tr>
-            <tr>
-                <td>1,005</td>
-                <td>Nulla</td>
-                <td>quis</td>
-                <td>sem</td>
-                <td>at</td>
-            </tr>
-            <tr>
-                <td>1,006</td>
-                <td>nibh</td>
-                <td>elementum</td>
-                <td>imperdiet</td>
-                <td>Duis</td>
-            </tr>
-            <tr>
-                <td>1,007</td>
-                <td>sagittis</td>
-                <td>ipsum</td>
-                <td>Praesent</td>
-                <td>mauris</td>
-            </tr>
-            <tr>
-                <td>1,008</td>
-                <td>Fusce</td>
-                <td>nec</td>
-                <td>tellus</td>
-                <td>sed</td>
-            </tr>
-            <tr>
-                <td>1,009</td>
-                <td>augue</td>
-                <td>semper</td>
-                <td>porta</td>
-                <td>Mauris</td>
-            </tr>
-            <tr>
-                <td>1,010</td>
-                <td>massa</td>
-                <td>Vestibulum</td>
-                <td>lacinia</td>
-                <td>arcu</td>
-            </tr>
-            <tr>
-                <td>1,011</td>
-                <td>eget</td>
-                <td>nulla</td>
-                <td>Class</td>
-                <td>aptent</td>
-            </tr>
-            <tr>
-                <td>1,012</td>
-                <td>taciti</td>
-                <td>sociosqu</td>
-                <td>ad</td>
-                <td>litora</td>
-            </tr>
-            <tr>
-                <td>1,013</td>
-                <td>torquent</td>
-                <td>per</td>
-                <td>conubia</td>
-                <td>nostra</td>
-            </tr>
-            <tr>
-                <td>1,014</td>
-                <td>per</td>
-                <td>inceptos</td>
-                <td>himenaeos</td>
-                <td>Curabitur</td>
-            </tr>
-            <tr>
-                <td>1,015</td>
-                <td>sodales</td>
-                <td>ligula</td>
-                <td>in</td>
-                <td>libero</td>
-            </tr>
-        </tbody>
-    </table>
-</div>
-
 
 <?php
 include_once './includes/rodape.php';

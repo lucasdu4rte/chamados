@@ -223,10 +223,10 @@
             <div class="row">
                 <div class="loginmodal-container">
                     <h1>Entrar com sua conta</h1><br>
-                    <form>
-                        <input class="form-control" type="text" name="user" placeholder="Usuário">
-                        <input type="password" name="pass" placeholder="Senha">
-                        <input type="submit" name="login" class="login loginmodal-submit" value="Entrar">
+                    <form method="post" action="login_vai.php">
+                        <input class="form-control" type="text" name="email" id="email" placeholder="E-mail">
+                        <input class="form-control" type="password" name="senha" id="senha" placeholder="Senha">
+                        <input type="submit" class="login loginmodal-submit" value="Entrar">
                     </form>
 
                     <div class="login-help">
