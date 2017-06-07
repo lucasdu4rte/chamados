@@ -85,6 +85,15 @@ if ($_POST) {
     }
 
 </script>
+ <script src="http:js/jquery.min.js" type="text/javascript"></script>
+ <script src="js/jquery.maskedinput.js" type="text/javascript"></script>
+ <script type="text/javascript">
+    jQuery.noConflict();
+    jQuery(function ($) {
+        $("#telefone").mask("(99)9999-9999");
+        $("#data_prazo").mask("99/99/9999");
+    });
+</script> 
 
 
 <h1 class="page-header">Chamado (Adicionar)</h1>

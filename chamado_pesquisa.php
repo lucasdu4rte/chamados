@@ -18,7 +18,16 @@ include_once './includes/funcoes.php';
         }
     }
 
-</script>    
+</script> 
+<script src="http:js/jquery.min.js" type="text/javascript"></script>
+<script src="js/jquery.maskedinput.js" type="text/javascript"></script>
+<script type="text/javascript">
+    jQuery.noConflict();
+    jQuery(function ($) {
+        $("#inicio_abertura").mask("99/99/9999");
+        $("#fim_abertura").mask("99/99/9999");
+    });
+</script> 
 
 <h1 class="page-header">Pesquisar Chamado</h1>
 <div class="form-horizontal" style="margin: 15px 15px 15px">
