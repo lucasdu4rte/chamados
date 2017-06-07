@@ -94,25 +94,26 @@ if ($_POST) {
     <form method="post" onsubmit="return valida(this);" action="chamado_add.php">
         <div class="row">
             <div class="form-group">
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <label for="solicitante">Solicitante</label>
-                    <select name="solicitante" id="departamento" class="form-control">
-                        <option selected value="0">Selecione...</option>
-                        <?php
-                        $sql = 'SELECT * FROM funcionario WHERE status = "s"';
-                        $resultado = mysqli_query($con, $sql) or die(mysqli_error($con));
+                    <?php
+                        echo "<select name='solicitante' id='solicitante' class='form-control' ".($_SESSION['nivel'] <> 1 ? 'readonly' : ''). ">
+                            <option selected value='0'>Selecione...</option>";
 
-                        while ($row = mysqli_fetch_array($resultado)) {
-                            echo "<option value='" . $row['id'] . "'>" . $row['nome'] . "</option>";
-                        }
-                        ?>
-                    </select>
+                            $sql = 'SELECT * FROM funcionario WHERE status = "s"';
+                            $resultado = mysqli_query($con, $sql) or die(mysqli_error($con));
+
+                            while ($row = mysqli_fetch_array($resultado)) {
+                                echo "<option value='" . $row['id'] . "'>". $row['nome'] . "</option>";
+                            }
+                        echo '</select>';
+                    ?>
                 </div>                          
             </div>
         </div>
         <div class="row">
             <div class="form-group">	
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <label for="prioridade">Prioridade</label>
                     <select name="prioridade" id="prioridade" class="form-control">
                         <option selected value="0">Selecione...</option>
@@ -127,7 +128,7 @@ if ($_POST) {
                     </select>
                 </div>      
 
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <label for="tipo">Tipo do chamado</label>
                     <select name="tipo" id="tipo" class="form-control">
                         <option selected value="0">Selecione...</option>
@@ -145,11 +146,11 @@ if ($_POST) {
         </div>		                  
         <div class="row">    
             <div class="form-group">
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <label for="telefone">Telefone</label>
                     <input type="tel" class="form-control" name="telefone" id="telefone" placeholder="(00) 0000-0000">
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <label for="ramal">Ramal</label>
                     <input type="text" class="form-control" name="ramal" id="ramal" placeholder="0000">
                 </div>
@@ -159,11 +160,11 @@ if ($_POST) {
         </div>
         <div class="row">
             <div class="form-group">
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <label for="data_inc">Abertura</label>
                     <input type="text" class="form-control" name="data_inc" id="data_inc" value="<?php echo date('d/m/Y'); ?>" readonly>
                 </div>
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <label for="data_prazo">Prazo</label>
                     <input type="text" class="form-control" name="data_prazo" id="data_prazo">
                 </div>
@@ -171,7 +172,7 @@ if ($_POST) {
         </div>
         <div class="row">
             <div class="form-group">
-                <div class="col-md-4">       
+                <div class="col-md-6">       
                     <label for="descricao">Descrição</label>
                     <input type="text" class="form-control" name="descricao" id="descricao" placeholder="Descrição">
                 </div>
@@ -179,7 +180,7 @@ if ($_POST) {
         </div>                    
         <div class="row">
             <div class="form-group">
-                <div class="col-md-4">
+                <div class="col-md-6">
                     <label for="observacao">Observação</label>
                     <textarea class="form-control" name="observacao" id="observacao"></textarea>
                 </div>

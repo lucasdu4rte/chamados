@@ -1,5 +1,9 @@
+<?php
+session_start();
+if (isset($_SESSION['id_usuario'])) { echo '<script>window.location.href = "http://localhost/chamados/dashboard_index.php";</script>'; };
+?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -178,8 +182,8 @@
 
         <!-- Top Navigation: Right Menu -->
         <ul class="nav navbar-right navbar-top-links">
-            <li class="dropdown navbar-inverse">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <li class="dropdown navbar-inverse disabled">
+                <a class="dropdown-toggle disabled" data-toggle="dropdown" href="#">
                     <i class="fa fa-bell fa-fw"></i> <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu dropdown-alerts">
@@ -200,8 +204,8 @@
                     </li>
                 </ul>
             </li>
-            <li class="dropdown">
-                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <li class="dropdown disabled">
+                <a class="dropdown-toggle disabled" data-toggle="dropdown" href="#">
                     <i class="fa fa-user fa-fw"></i> Painel <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu dropdown-user">
@@ -221,9 +225,52 @@
     <div id="page-wrapper" style="margin-top: 35px;">
         <div class="container-fluid">
             <div class="row">
+                <?php
+                // Inicia sessões se o formulario tiver enviado
+                if (isset($_POST['email'])) {
+
+                    require_once './includes/conexao.php';
+                    include_once './includes/funcoes.php';
+
+                // Usuário não forneceu a senha ou o login 
+                    if (!isset($_POST['email']) || !isset($_POST['senha'])) {
+                        echo "<p class='alert alert-danger'>Você esqueceu de digitar seu email ou sua senha!</p>";
+                    } else {
+                        // Recupera o login 
+                        $email = mysqli_real_escape_string($con, $_POST['email']);
+                        // Recupera a senha
+                        $senha = mysqli_real_escape_string($con, $_POST['senha']);
+
+                        /**
+                         * Executa a consulta no banco de dados. 
+                         * Caso o número de linhas retornadas seja 1 o login é válido, 
+                         * caso 0, inválido. 
+                         */
+                        $SQL = "SELECT id, nome, email, senha, id_nivel FROM funcionario WHERE email = '" . $email . "' AND senha = '" . $senha."'";
+                        $result_id = mysqli_query($con, $SQL) or die("Erro no banco de dados!");
+                        $total = mysqli_num_rows($result_id);
+                    // Caso o usuário tenha digitado um email ou senha válido o número de linhas será 1.. 
+                        if ($total > 0) {
+                    // Obtém os dados do usuário, para poder verificar a senha e passar os demais dados para a sessão 
+                            $dados = mysqli_fetch_array($result_id);
+
+                    // TUDO OK! Agora, passa os dados para a sessão e redireciona o usuário 
+                            $_SESSION["id_usuario"] = $dados["id"];
+                            $_SESSION["nome_usuario"] = stripslashes($dados["nome"]);
+                            $_SESSION["nivel"] = $dados["id_nivel"];
+                            echo '<script>window.location.href = "http://localhost/chamados/dashboard_index.php";</script>';
+                        }
+                    // Login inválido 
+                        else {
+                            echo "<p class='alert alert-danger'>O email ou senha fornecido são inválidos!</p>";
+                        }
+                    }
+                }
+                ?>
+                
                 <div class="loginmodal-container">
                     <h1>Entrar com sua conta</h1><br>
-                    <form method="post" action="login_vai.php">
+                    <form id="form_login" method="post" action="login.php">
                         <input class="form-control" type="text" name="email" id="email" placeholder="E-mail">
                         <input class="form-control" type="password" name="senha" id="senha" placeholder="Senha">
                         <input type="submit" class="login loginmodal-submit" value="Entrar">
@@ -249,6 +296,9 @@
 <!-- jQuery -->
 <script src="js/jquery.min.js"></script>
 
+<!-- jQuery Validate -->
+<script src="js/jquery.validate.js" type="text/javascript">
+
 <!-- Bootstrap Core JavaScript -->
 <script src="js/bootstrap.min.js"></script>
 
@@ -260,6 +310,28 @@
     
 <script>
 $(document).ready(function(){
+    
+    $("#form_login").validate({
+        rules: {
+          email: {
+            required: true
+          },
+          senha: {
+            required: true
+          }
+        },
+        messages: {
+          email: {
+            required: "Digite o seu email"
+          },
+          senha: {
+            required: "Digite sua senha"
+          }
+        },
+        submitHandler: function (form) { // for demo
+          return true;
+        }
+    });
     
     $(window).scroll(function(){
         if ($(this).scrollTop() > 100) {
