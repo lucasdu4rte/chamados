@@ -1,7 +1,7 @@
 <?php
-require_once './includes/conexao.php';
 include_once './includes/cabecalho.php';
 include_once './includes/dashboard.php';
+require_once './includes/conexao.php';
 ?>
         <h1 class="page-header">Status Chamado</h1>
         

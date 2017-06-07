@@ -37,6 +37,16 @@ $mensagem = '';
     $funcionario = mysqli_fetch_assoc($resultado);
 }
 ?>
+    <script src="http:js/jquery.min.js" type="text/javascript"></script>
+    <script src="js/jquery.maskedinput.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        jQuery.noConflict();
+        jQuery(function ($) {
+            $("#data_nasc").mask("99/99/9999");
+            $("#telefone").mask("(99)9999-9999");
+            $("#celular").mask("(99) 99999-9999");
+        });
+    </script> 
     <h1 class="page-header">Funcionário (<?= $op; ?>)</h1>
     <?php
     echo $mensagem;
@@ -53,7 +63,7 @@ $mensagem = '';
             <div class="row">
                 <div class="form-group col-md-5">
                     <label for="data_nasc">Data de nascimento</label>
-                    <input type="date" class="form-control" name="data_nasc" id="data_nasc" value="<?= $funcionario['data_nasc']; ?>" >
+                    <input type="text" class="form-control" name="data_nasc" id="data_nasc" value="<?= $funcionario['data_nasc']; ?>" >
                 </div>
             </div>
             <div class="row">
