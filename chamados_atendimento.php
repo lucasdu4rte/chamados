@@ -21,7 +21,7 @@ include_once './includes/funcoes.php';
         </thead>
         <tbody>
             <?php
-            $sql = 'SELECT * FROM chamado WHERE id_status = 2';
+            $sql = 'SELECT * FROM chamado WHERE id_status = 2 AND id_status = 3';
             $resultado = mysqli_query($con, $sql) or die(mysqli_error($con));
             
             if (mysqli_num_rows($resultado) > 0) {

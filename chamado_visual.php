@@ -5,6 +5,50 @@ include_once './includes/dashboard.php';
 require_once './includes/conexao.php';
 include_once './includes/funcoes.php';
 
+if (isset($_POST['salvar'])){
+    $id_chamado = $_POST['id_chamado'];
+    
+    $sql = 'UPDATE chamado SET ';
+    
+    if($_POST['status'] <> ''){
+        $sql .= ' id_status = "'.$_POST['status'].'"';
+    }
+    
+    if($_POST['solicitante'] <> ''){
+        $sql .= ', id_solicitante = "'.$_POST['solicitante'].'"';
+    }
+    
+    if($_POST['responsavel'] <> ''){
+        $sql .= ', id_responsavel = "'.$_POST['responsavel'].'"';
+    }
+    
+    if($_POST['prioridade'] <> ''){
+        $sql .= ', id_priori = "'.$_POST['prioridade'].'"';
+    }
+    
+    if($_POST['responsavel'] <> ''){
+        $sql .= ', id_responsavel = "'.$_POST['responsavel'].'"';
+    }
+    
+    if($_POST['data_prazo'] <> ''){
+        $sql .= ', data_prazo = "'.convertData('amd', $_POST['data_prazo']).'"';
+    }
+    
+    $sql .= ' WHERE id = '.$id_chamado;
+    
+    $resultado = mysqli_query($con, $sql);
+
+    if ($resultado) {
+        $mensagem = '<p class="alert alert-success">Chamado alterado com sucesso!</p>';
+    } else {
+        $mensagem = '<p class="alert alert-danger">O chamado não foi alterado. <br>Por favor, tente mais tarde.</p>';
+    }
+    
+    $_GET['id'] = $id_chamado;
+    
+    echo $mensagem;
+}
+
 if (isset($_GET['id'])) {
     
     $codigo = mysqli_real_escape_string($con, $_GET['id']);
@@ -16,7 +60,7 @@ if (isset($_GET['id'])) {
     $chamado = mysqli_fetch_assoc($resultado);
 ?>
 
-<h1 class="page-header">Visualisar chamado</h1>
+<h1 class="page-header">Visualizar chamado</h1>
 
  <div class="form-horizontal" style="margin: 15px 15px 15px 15px">
         <form method="post" action="chamado_visual.php">
@@ -27,11 +71,11 @@ if (isset($_GET['id'])) {
                         <input type="text" class="form-control" name="codigo" id="codigo" value="<?php echo $chamado['id']; ?>" readonly>
                     </div>
                     <div class="col-md-4">
-                        <label for="responsavel">Status</label>
+                        <label for="status">Status</label>
                         <?php
                             $sql = 'SELECT * FROM status_chamado';
                             $resultado = mysqli_query($con, $sql) or die(mysqli_error($con));
-                            echo '<select name="status" id="status" class="form-control" '.($_SESSION['nivel'] == 2 ? 'disabled' : '').'> <option>Selecione...</option>';
+                            echo '<select name="status" id="status" class="form-control" '.(($_SESSION['nivel'] == 2) || ($chamado['id_status'] == 4) ? 'disabled' : '').'> <option>Selecione...</option>';
                             while ($row = mysqli_fetch_array($resultado)) {
                                 echo "<option value='".$row['id']."' ".($chamado['id_status'] == $row['id'] ? 'selected' : '').">".$row['descricao']."</option>";
                             }
@@ -49,7 +93,7 @@ if (isset($_GET['id'])) {
                         $sql = 'SELECT * FROM funcionario';
                         
                         $resultado = mysqli_query($con, $sql) or die(mysqli_error($con));
-                        echo '<select name="solicitante" id="solicitante" class="form-control" '.($_SESSION['nivel'] == 2 ? 'disabled' : '').'> <option>Selecione...</option>';
+                        echo '<select name="solicitante" id="solicitante" class="form-control" '.(($_SESSION['nivel'] == 2) || ($chamado['id_status'] == 4) ? 'disabled' : '').'> <option>Selecione...</option>';
                         
                         while ($row = mysqli_fetch_array($resultado)) {
                             echo "<option value='".$row['id']."' ".($chamado['id_solicitante'] == $row['id'] ? 'selected' : '').">".$row['nome']."</option>";
@@ -74,10 +118,10 @@ if (isset($_GET['id'])) {
                         <label for="responsavel">Responsável</label>
                         <?php
                         
-                        $sql = 'SELECT * FROM funcionario';
+                        $sql = 'SELECT * FROM funcionario WHERE id_nivel = 1';
                         
                         $resultado = mysqli_query($con, $sql) or die(mysqli_error($con));
-                        echo '<select name="responsavel" id="responsavel" class="form-control" '.($_SESSION['nivel'] == 2 ? 'disabled' : '').'> <option>Selecione...</option>';
+                        echo '<select name="responsavel" id="responsavel" class="form-control" '.(($_SESSION['nivel'] == 2) || ($chamado['id_status'] == 4) ? 'disabled' : '').'> <option>Selecione...</option>';
                         
                         while ($row = mysqli_fetch_array($resultado)) {
                             echo "<option value='".$row['id']."' ".($chamado['id_responsavel'] == $row['id'] ? 'selected' : '').">".$row['nome']."</option>";
@@ -97,7 +141,7 @@ if (isset($_GET['id'])) {
                     $sql = 'SELECT * FROM prioridade';
 
                     $resultado = mysqli_query($con, $sql) or die(mysqli_error($con));
-                    echo '<select name="prioridade" id="prioridade" class="form-control" '.($_SESSION['nivel'] == 2 ? 'disabled' : '').'> <option>Selecione...</option>';
+                    echo '<select name="prioridade" id="prioridade" class="form-control" '.(($_SESSION['nivel'] == 2) || ($chamado['id_status'] == 4) ? 'disabled' : '').'> <option>Selecione...</option>';
 
                     while ($row = mysqli_fetch_array($resultado)) {
                         echo "<option value='".$row['id']."' ".($chamado['id_responsavel'] == $row['id'] ? 'selected' : '').">".$row['descricao']."</option>";
@@ -112,7 +156,7 @@ if (isset($_GET['id'])) {
                     </div>
                     <div class="col-md-2">
                         <label for="data_prazo">Prazo</label>
-                        <input type="text" class="form-control" name="data_prazo" id="data_prazo" value="<?php echo convertData('dma', $chamado['data_prazo']); ?>">
+                        <input type="text" class="form-control" name="data_prazo" id="data_prazo" value="<?php echo convertData('dma', $chamado['data_prazo']); ?>" <?= (($_SESSION['nivel'] == 2) || ($chamado['id_status'] == 4) ? 'readonly' : ''); ?>>
                     </div>
                 </div>
             </div>
@@ -140,13 +184,17 @@ if (isset($_GET['id'])) {
                     <textarea class="form-control" name="observacao" id="observacao" readonly><?php echo $chamado['observacao']; ?></textarea>
                 </div>
             </div>
-            <div class="row">
-                <div class="form-group col-md-5">
-                    <a class="btn btn-default" href="dashboard_index.php">Voltar</a>
-                    <button type="submit" class="btn btn-success">Salvar</button>
-                </div>
-            </div>
-            <input type="hidden" name="salvar" value="salvando">
+            <?php if (($_SESSION['nivel'] == 2) || ($chamado['id_status'] <> 4)) {
+                echo '<div class="row">
+                    <div class="form-group col-md-5">
+                        <a class="btn btn-default" href="dashboard_index.php">Voltar</a>
+                        <button type="submit" class="btn btn-success">Salvar</button>
+                    </div>
+                </div>';
+            }
+            ?>
+            <input type="hidden" name="salvar" value="1">
+            <input type="hidden" name="id_chamado" value="<?= $chamado['id'];?>">
         </form>
             <div class="row">
                 <div class="panel panel-default">
@@ -164,7 +212,6 @@ if (isset($_GET['id'])) {
                                             </div>
                                         </div>
                                         <input type="hidden" name="id_chamado" id="id_chamado" value="'.$chamado['id'].'">
-                                        <input type="hidden" name="id_funcionario" id="id_funcionario" value="'.$chamado['id_solicitante'].'">
                                         <div id="div_result">
                                         </div>
                                         <div class="row">

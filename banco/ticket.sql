@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.6.4
+-- version 4.7.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 02-Jun-2017 às 00:09
--- Versão do servidor: 5.7.14
--- PHP Version: 5.6.25
+-- Generation Time: 08-Jun-2017 às 03:09
+-- Versão do servidor: 10.1.22-MariaDB
+-- PHP Version: 7.1.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -47,8 +49,8 @@ CREATE TABLE `chamado` (
 --
 
 INSERT INTO `chamado` (`id`, `id_responsavel`, `id_solicitante`, `telefone`, `ramal`, `data_inc`, `data_alt`, `data_prazo`, `descricao`, `observacao`, `id_status`, `id_tipo`, `id_priori`) VALUES
-(2, 2, 1, '19499911', '2131', '2017-06-01', '2017-06-01', '2017-06-05', 'iasudihuahsd', 'asduahsiudauhsd', 2, 1, 2),
-(3, 2, 1, NULL, NULL, '2017-05-31', NULL, '2017-06-12', 'Skype nÃ£o conecta', 'Skype nÃ£o conecta, mas internet estÃ¡ normal...', 2, 2, 2);
+(2, 3, 1, '19499911', '2131', '2017-06-01', '2017-06-01', '2017-06-05', 'iasudihuahsd', 'asduahsiudauhsd', 1, 1, 2),
+(3, 2, 1, NULL, NULL, '2017-05-31', NULL, '2017-06-12', 'Skype nÃ£o conecta', 'Skype nÃ£o conecta, mas internet estÃ¡ normal...', 1, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -100,7 +102,7 @@ INSERT INTO `funcionario` (`id`, `nome`, `data_nasc`, `email`, `senha`, `telefon
 (1, 'Lucas', '11/12/1995', 'lucas@email.com', 'asdauisdui', '19 33778032', 'asdaushduahsd', '8033', 1, 's', 'analista', 1),
 (2, 'Daniel', '28/11/1995', 'daniel@email.com', '123', '19 33778032', NULL, '8034', 1, 's', '', 1),
 (3, 'FuncioTeste', '11/12/1995', 'FuncioTeste@gmail.com', '123', '(19) 3333333', '(19) 99999-9999', '3333', 1, 's', '', 1),
-(4, 'Hiago', '11/12/1995', 'hia@gmailc.om', '123456', '99 9999 999922', '99999999999', '2999', 2, 's', 'Auxiliar', 4);
+(4, 'Hiago', '11/12/1995', 'hiago', '123456', '99 9999 999922', '99999999999', '2999', 2, 's', 'Auxiliar', 2);
 
 -- --------------------------------------------------------
 
@@ -129,7 +131,8 @@ INSERT INTO `historico` (`id`, `descricao`, `data_inc`, `hora_inc`, `id_funciona
 (5, 'como solicitando o usuÃ¡rio foi atendido.', '2017-06-01', '20:35:29', 1, 2),
 (6, 'Finalizando chamado.', '2017-06-01', '20:36:34', 1, 2),
 (7, 'Finalizando chamado.', '2017-06-01', '20:37:39', 1, 2),
-(8, 'teste', '2017-06-01', '20:38:10', 1, 2);
+(8, 'teste', '2017-06-01', '20:38:10', 1, 2),
+(9, 'Olá Daniel', '2017-06-08', '03:02:53', 2, 3);
 
 -- --------------------------------------------------------
 
@@ -189,9 +192,8 @@ INSERT INTO `status_chamado` (`id`, `descricao`) VALUES
 (1, 'Aberto'),
 (2, 'Em atendimento'),
 (3, 'Pendente'),
-(4, 'ConcluÃ­do'),
-(5, 'Resolvido'),
-(6, 'Encerrado');
+(4, 'Concluído'),
+(5, 'Encerrado');
 
 -- --------------------------------------------------------
 
@@ -300,7 +302,7 @@ ALTER TABLE `funcionario`
 -- AUTO_INCREMENT for table `historico`
 --
 ALTER TABLE `historico`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 --
 -- AUTO_INCREMENT for table `nivel`
 --
@@ -339,6 +341,7 @@ ALTER TABLE `chamado`
 --
 ALTER TABLE `funcionario`
   ADD CONSTRAINT `fk_id_departamento` FOREIGN KEY (`id_departamento`) REFERENCES `departamento` (`id`);
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

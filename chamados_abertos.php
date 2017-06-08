@@ -5,10 +5,11 @@ include_once './includes/dashboard.php';
 require_once './includes/conexao.php';
 include_once './includes/funcoes.php';
 ?>
+
 <h1 class="page-header">Chamados Abertos</h1>
 
 <div class="table-responsive" style="margin-top: 15px">
-    <table class="table table-striped">
+    <table class="table table-striped" id="mytable">
         <thead>
             <tr>
                 <th>Código Chamado</th>
@@ -50,5 +51,14 @@ include_once './includes/funcoes.php';
         </tbody>
     </table>
 </div>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs/jq-2.2.4/dt-1.10.15/r-2.1.1/datatables.min.css"/>
+ 
+<script type="text/javascript" src="https://cdn.datatables.net/v/bs/jq-2.2.4/dt-1.10.15/r-2.1.1/datatables.min.js"></script>
+
+<script type="text/javascript">
+jQuery(document).ready(function() {
+    jQuery(table).DataTable();
+} );
+</script>
 <?php
 include_once './includes/rodape.php';
