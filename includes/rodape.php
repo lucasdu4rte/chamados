@@ -22,6 +22,16 @@
 <script>
 $(document).ready(function(){
     
+    $("#buscar_dash").on("change paste keyup", function() {
+        var buscar_dash = $(this).val();
+        
+        $.post('busca_dash.php',{ titulo: buscar_dash },function(data){
+            //mostrando o retorno do post
+            console.log(data);
+            $("#custom-search-form").append(data.html);
+        });
+    });
+    
     $(window).scroll(function(){
         if ($(this).scrollTop() > 100) {
             $('a[href="#top"]').fadeIn();

@@ -10,7 +10,7 @@
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
 START TRANSACTION;
-SET time_zone = "+00:00";
+SET time_zone = "-03:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -50,7 +50,7 @@ CREATE TABLE `chamado` (
 
 INSERT INTO `chamado` (`id`, `id_responsavel`, `id_solicitante`, `telefone`, `ramal`, `data_inc`, `data_alt`, `data_prazo`, `descricao`, `observacao`, `id_status`, `id_tipo`, `id_priori`) VALUES
 (2, 3, 1, '19499911', '2131', '2017-06-01', '2017-06-01', '2017-06-05', 'iasudihuahsd', 'asduahsiudauhsd', 1, 1, 2),
-(3, 2, 1, NULL, NULL, '2017-05-31', NULL, '2017-06-12', 'Skype nÃ£o conecta', 'Skype nÃ£o conecta, mas internet estÃ¡ normal...', 1, 2, 2);
+(3, 2, 1, NULL, NULL, '2017-05-31', NULL, '2017-06-12', 'Skype não conecta', 'Skype não conecta, mas internet está normal...', 1, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -128,7 +128,7 @@ INSERT INTO `historico` (`id`, `descricao`, `data_inc`, `hora_inc`, `id_funciona
 (2, 'TESTEEEEE2222 TESTEEEEE22222 TESTEEEEE TESTEEEEE TESTEEEEE222 ', '2017-06-01', '03:09:14', 2, 3),
 (3, 'teste', '2017-06-01', '20:33:14', 2, 1),
 (4, 'teste', '2017-06-01', '20:34:35', 1, 2),
-(5, 'como solicitando o usuÃ¡rio foi atendido.', '2017-06-01', '20:35:29', 1, 2),
+(5, 'como solicitando o usuário foi atendido.', '2017-06-01', '20:35:29', 1, 2),
 (6, 'Finalizando chamado.', '2017-06-01', '20:36:34', 1, 2),
 (7, 'Finalizando chamado.', '2017-06-01', '20:37:39', 1, 2),
 (8, 'teste', '2017-06-01', '20:38:10', 1, 2),
@@ -346,3 +346,7 @@ COMMIT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+
+
+CREATE TABLE `ticket`.`busca` ( `id` INT NOT NULL AUTO_INCREMENT , `titulo` VARCHAR(250) NOT NULL , `url` VARCHAR NOT NULL , `ativo` BOOLEAN NOT NULL DEFAULT TRUE , `data_inc` DATETIME NOT NULL DEFAULT 'NOW()' , PRIMARY KEY (`id`)) ENGINE = InnoDB CHARSET=latin1 COLLATE latin1_swedish_ci;
+

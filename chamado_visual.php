@@ -144,7 +144,7 @@ if (isset($_GET['id'])) {
                     echo '<select name="prioridade" id="prioridade" class="form-control" '.(($_SESSION['nivel'] == 2) || ($chamado['id_status'] == 4) ? 'disabled' : '').'> <option>Selecione...</option>';
 
                     while ($row = mysqli_fetch_array($resultado)) {
-                        echo "<option value='".$row['id']."' ".($chamado['id_responsavel'] == $row['id'] ? 'selected' : '').">".$row['descricao']."</option>";
+                        echo "<option value='".$row['id']."' ".($chamado['id_priori'] == $row['id'] ? 'selected' : '').">".$row['descricao']."</option>";
                     }
                     echo '</select>';
 

@@ -7,8 +7,8 @@
                         Olá, <?php echo $_SESSION['nome_usuario']; ?>!
                     </li>
                     <li class="sidebar-search">
-                        <div class="input-group custom-search-form">
-                            <input type="text" class="form-control" placeholder="Search...">
+                        <div class="input-group custom-search-form" id="custom-search-form">
+                            <input type="text" class="form-control" name="buscar_dash" list="buscar_dash" id="buscar_dash" placeholder="Buscar...">
                             <span class="input-group-btn">
                                 <button class="btn btn-primary" type="button">
                                     <i class="fa fa-search"></i>
